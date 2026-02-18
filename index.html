@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> <!--Cloudflare's Public API key-->
+    <!--we can always download the qrcode.min packages locally to allow offline use-->
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="eyebrow">— Tool 001</div>
+        <h1>QR<span>Studio</span></h1>
+    </header>
+
+        <div class="layout">
+                <!-- LEFT: Controls -->
+                <div class="panel">
+                        <div class="field">
+                                <label>Content / URL *</label>
+                                <input type="url" id="qr-content" placeholder="https://example.com" autocomplete="off" />
+                        </div>
+
+                        <div class="field">
+                                <div class="section-title">Logo (optional)</div>
+                        <div class="upload-area">
+                    <input type="file" id="logo-upload" accept="image/*" />
+                    <div class="upload-label">
+                        <strong>Click to upload</strong> your logo<br>PNG, SVG, JPG
+                    </div>
+                    <img id="logo-preview" alt="Logo preview" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Caption text (optional)</label>
+                <input type="text" id="qr-caption" placeholder="Scan me · @yourhandle" />
+            </div>
+
+            <div class="field">
+                <div class="section-title">Colors</div>
+                <div class="color-row">
+                    <div>
+                        <label>Foreground</label>
+                        <div class="color-field">
+                            <input type="color" id="color-dark" value="#000000" />
+                            <span class="color-hex" id="hex-dark">#000000</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Background</label>
+                        <div class="color-field">
+                            <input type="color" id="color-light" value="#ffffff" />
+                            <span class="color-hex" id="hex-light">#ffffff</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Size</label>
+                <div class="size-row">
+                    <button class="size-btn" data-size="200">200px</button>
+                    <button class="size-btn active" data-size="300">300px</button>
+                    <button class="size-btn" data-size="400">400px</button>
+                </div>
+            </div>
+
+            <button class="btn-generate" id="btn-generate">Generate QR Code →</button>
+        </div>
+
+        <!-- RIGHT: Preview -->
+        <div class="panel panel-right">
+            <div class="empty-state" id="empty-state">
+                <div class="icon">⬛</div>
+                <p>Your QR code<br>will appear here</p>
+            </div>
+
+            <div class="qr-wrapper" id="qr-wrapper" style="display:none;">
+                <div id="qr-canvas-container">
+                    <div id="qr-output"></div>
+                    <div id="qr-logo-overlay">
+                        <img id="qr-logo-img" alt="" />
+                    </div>
+                </div>
+                <div class="qr-caption" id="qr-caption-display"></div>
+                <div class="download-row">
+                    <button class="btn-dl" id="btn-png">↓ PNG</button>
+                    <button class="btn-dl" id="btn-svg">↓ SVG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

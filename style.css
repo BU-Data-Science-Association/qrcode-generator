@@ -1,0 +1,342 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --accent: #e63946;
+    --muted: #888;
+    --border: #0d0d0d;
+    --radius: 4px;
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+    background-image:
+        radial-gradient(circle at 20% 10%, rgba(230,57,70,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 90%, rgba(230,57,70,0.06) 0%, transparent 40%),
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.04) 39px, rgba(0,0,0,0.04) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.04) 39px, rgba(0,0,0,0.04) 40px);
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+}
+
+header {
+    margin-bottom: 3rem;
+}
+
+.eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+h1 {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+}
+
+h1 span {
+    display: block;
+    color: var(--accent);
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border: 2px solid var(--border);
+}
+
+@media (max-width: 640px) {
+    .layout { grid-template-columns: 1fr; }
+}
+
+.panel {
+    background: var(--paper);
+    padding: 2rem;
+}
+
+.panel-right {
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.02) 10px,
+        rgba(255,255,255,0.02) 11px
+    );
+}
+
+.field {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: var(--muted);
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+    width: 100%;
+    border: 2px solid var(--border);
+    background: transparent;
+    padding: 0.75rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+    resize: vertical;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+    border-color: var(--accent);
+}
+
+.upload-area {
+    border: 2px dashed var(--border);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+}
+
+.upload-area:hover {
+    border-color: var(--accent);
+    background: rgba(230,57,70,0.04);
+}
+
+.upload-area input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+}
+
+.upload-label {
+    font-size: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+}
+
+.upload-label strong {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+#logo-preview {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: none;
+    margin: 0.5rem auto 0;
+    border: 1px solid var(--border);
+}
+
+.color-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.color-field {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 2px solid var(--border);
+    padding: 0.5rem 0.75rem;
+}
+
+input[type="color"] {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.color-hex {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+}
+
+.size-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+}
+
+.size-btn {
+    background: transparent;
+    border: 2px solid var(--border);
+    padding: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.size-btn:hover { background: rgba(0,0,0,0.06); }
+.size-btn.active { background: var(--ink); color: var(--paper); }
+
+.btn-generate {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: 2px solid var(--accent);
+    padding: 1rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 0.5rem;
+}
+
+.btn-generate:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+}
+
+.btn-generate:active { transform: scale(0.99); }
+
+/* QR Output */
+.qr-wrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#qr-canvas-container {
+    position: relative;
+    display: inline-block;
+    background: white;
+    padding: 16px;
+}
+
+#qr-canvas-container canvas,
+#qr-canvas-container img {
+    display: block;
+}
+
+#qr-logo-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 4px;
+    display: none;
+}
+
+#qr-logo-overlay img {
+    display: block;
+    object-fit: contain;
+}
+
+.qr-caption {
+    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    color: rgba(245,240,232,0.7);
+    text-align: center;
+    max-width: 220px;
+    word-break: break-word;
+}
+
+.empty-state {
+    text-align: center;
+    z-index: 1;
+}
+
+.empty-state .icon {
+    font-size: 3rem;
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.download-row {
+    display: flex;
+    gap: 2px;
+    z-index: 1;
+}
+
+.btn-dl {
+    background: rgba(245,240,232,0.1);
+    color: var(--paper);
+    border: 1px solid rgba(245,240,232,0.2);
+    padding: 0.55rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+}
+
+.btn-dl:hover { background: rgba(245,240,232,0.2); }
+
+.section-title {
+    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
